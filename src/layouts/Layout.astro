@@ -1,0 +1,18 @@
+---
+interface Props { title: string; description?: string; }
+const { title, description = 'What Should I Eat Today?' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title><meta name="description" content={description} />
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+      <header class="text-center mb-8"><h1 class="text-4xl font-bold text-orange-600 mb-2">What Should I Eat Today?</h1><p class="text-gray-600">Spin the wheel and let fate decide!</p></header>
+      <main><div class="bg-white rounded-xl shadow-lg p-6 mb-6"><slot /></div></main>
+      <footer class="text-center mt-8 text-gray-500 text-sm"><p>&copy; 2025 What Should I Eat Today? Random food picker.</p></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="What Should I Eat Today? - Random Food Picker Wheel" description="Spin the food wheel and let fate choose your meal! Add custom options and get a fun food suggestion.">
+  <section class="mb-8">
+    <p class="text-gray-600 leading-relaxed">Can not decide <strong>what to eat today</strong>? Spin the <strong>food picker wheel</strong> and let fate choose! Add your own options or use our preset list.</p>
+  </section>
+
+  <section id="calculator" class="text-center">
+    <div class="mb-6">
+      <canvas id="wheelCanvas" width="350" height="350" class="mx-auto rounded-full shadow-lg border-4 border-orange-300"></canvas>
+      <div class="text-4xl -mt-2">&#9660;</div>
+    </div>
+
+    <button id="spinBtn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-lg mb-6 transition-all transform hover:scale-105 shadow-lg">Spin the Wheel!</button>
+
+    <div id="resultArea" class="hidden mb-6">
+      <div class="bg-orange-50 rounded-xl p-6 border-2 border-orange-300">
+        <p class="text-sm text-orange-600 mb-1">Today you should eat...</p>
+        <p id="resultFood" class="text-4xl font-bold text-orange-700 mb-2"></p>
+        <p id="resultTagline" class="text-lg text-gray-600 italic"></p>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 text-left mb-6">
+      <p class="text-sm font-semibold text-gray-700 mb-3">Customize Options (one per line)</p>
+      <textarea id="optionsInput" rows="6" class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none">Hamburger
+Pizza
+Sushi
+Ramen
+Salad
+Pasta
+Tacos
+Curry
+Stir Fry
+BBQ</textarea>
+      <button id="updateBtn" class="mt-3 bg-gray-600 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-lg">Update Wheel</button>
+    </div>
+  </section>
+
+  <section class="mt-10 mb-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Why Use a Random Food Picker?</h2>
+    <p class="text-gray-600 text-sm leading-relaxed mb-4">Decision fatigue is real. A <strong>random food wheel</strong> removes the burden of choice and adds fun to meal planning.</p>
+  </section>
+
+  <section id="faq" class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">FAQ</h2>
+    <div class="space-y-4">
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">How does the food wheel work?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>Click spin and the wheel rotates randomly to land on a food item.</p></div></details>
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">Can I add my own foods?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>Yes! Edit the text area with one food per line and click Update.</p></div></details>
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">Is the spin random?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>Yes. Uses Math.random() for rotation angle.</p></div></details>
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">How many options?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>As many as you want. 6-12 works best for readability.</p></div></details>
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">Mobile friendly?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>Yes! Fully responsive on all devices.</p></div></details>
+    </div>
+  </section>
+
+  <script type="application/ld+json" is:inline>{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the food wheel work?","acceptedAnswer":{"@type":"Answer","text":"Click spin and the wheel rotates randomly."}},{"@type":"Question","name":"Can I add my own foods?","acceptedAnswer":{"@type":"Answer","text":"Yes! One food per line."}},{"@type":"Question","name":"Is the spin random?","acceptedAnswer":{"@type":"Answer","text":"Yes. Uses Math.random()."}},{"@type":"Question","name":"How many options?","acceptedAnswer":{"@type":"Answer","text":"6-12 works best."}},{"@type":"Question","name":"Mobile friendly?","acceptedAnswer":{"@type":"Answer","text":"Yes! Fully responsive."}}]}</script>
+
+  <script is:inline define:vars={{}}>
+    (function () {
+      var canvas = document.getElementById("wheelCanvas");
+      var ctx = canvas.getContext("2d");
+      var spinBtn = document.getElementById("spinBtn");
+      var resultArea = document.getElementById("resultArea");
+      var updateBtn = document.getElementById("updateBtn");
+      var optionsInput = document.getElementById("optionsInput");
+      var currentAngle = 0;
+      var isSpinning = false;
+      var TAGLINES = ["A great choice!","You will love it!","Perfect meal!","Delicious!","Enjoy!","Yummy!","Tasty pick!","Bon appetit!"];
+      var COLORS = ["#f97316","#eab308","#22c55e","#3b82f6","#8b5cf6","#ec4899","#ef4444","#14b8a6","#f59e0b","#6366f1","#84cc16","#06b6d4"];
+
+      function getOptions() { return optionsInput.value.split("\n").map(function(s){return s.trim();}).filter(function(s){return s.length>0;}); }
+
+      function drawWheel(opts) {
+        var cx=canvas.width/2, cy=canvas.height/2, r=canvas.width/2-10;
+        var slice=(2*Math.PI)/opts.length;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for (var i=0;i<opts.length;i++) {
+          var sa=currentAngle+i*slice, ea=sa+slice;
+          ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,sa,ea); ctx.closePath();
+          ctx.fillStyle=COLORS[i%COLORS.length]; ctx.fill();
+          ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.stroke();
+          ctx.save(); ctx.translate(cx,cy); ctx.rotate(sa+slice/2);
+          ctx.textAlign="right"; ctx.fillStyle="#fff"; ctx.font="bold 14px sans-serif";
+          ctx.fillText(opts[i], r-15, 5); ctx.restore();
+        }
+      }
+
+      function spin() {
+        if (isSpinning) return;
+        var opts=getOptions(); if (opts.length<2) return;
+        isSpinning=true; spinBtn.disabled=true; spinBtn.textContent="Spinning...";
+        resultArea.classList.add("hidden");
+        var totalRot=(Math.random()*5+8)*2*Math.PI, dur=4000, start=Date.now(), sa=currentAngle;
+        function anim() {
+          var t=Math.min((Date.now()-start)/dur,1), ease=1-Math.pow(1-t,3);
+          currentAngle=sa+totalRot*ease; drawWheel(opts);
+          if (t<1) { requestAnimationFrame(anim); }
+          else {
+            isSpinning=false; spinBtn.disabled=false; spinBtn.textContent="Spin Again!";
+            var sl=(2*Math.PI)/opts.length, na=(2*Math.PI-(currentAngle%(2*Math.PI)))%(2*Math.PI);
+            var idx=Math.floor(na/sl)%opts.length;
+            document.getElementById("resultFood").textContent=opts[idx];
+            document.getElementById("resultTagline").textContent=TAGLINES[Math.floor(Math.random()*TAGLINES.length)];
+            resultArea.classList.remove("hidden");
+          }
+        }
+        anim();
+      }
+
+      spinBtn.addEventListener("click", spin);
+      updateBtn.addEventListener("click", function(){ currentAngle=0; drawWheel(getOptions()); });
+      drawWheel(getOptions());
+    })();
+  </script>
+</Layout>
