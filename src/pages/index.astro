@@ -3,27 +3,23 @@ import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="What Should I Eat Today? - Random Food Picker Wheel" description="Spin the food wheel and let fate choose your meal! Add custom options and get a fun food suggestion.">
   <section class="mb-8">
-    <p class="text-gray-600 leading-relaxed">Can not decide <strong>what to eat today</strong>? Spin the <strong>food picker wheel</strong> and let fate choose! Add your own options or use our preset list.</p>
+    <p class="text-gray-600 leading-relaxed" data-i18n="pageDesc">Can not decide <strong>what to eat today</strong>? Spin the <strong>food picker wheel</strong> and let fate choose! Add your own options or use our preset list.</p>
   </section>
-
   <section id="calculator" class="text-center">
     <div class="mb-6">
       <canvas id="wheelCanvas" width="350" height="350" class="mx-auto rounded-full shadow-lg border-4 border-orange-300"></canvas>
       <div class="text-4xl -mt-2">&#9660;</div>
     </div>
-
-    <button id="spinBtn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-lg mb-6 transition-all transform hover:scale-105 shadow-lg">Spin the Wheel!</button>
-
+    <button id="spinBtn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-lg mb-6 transition-all transform hover:scale-105 shadow-lg" data-i18n="spinBtn">Spin the Wheel!</button>
     <div id="resultArea" class="hidden mb-6">
       <div class="bg-orange-50 rounded-xl p-6 border-2 border-orange-300">
-        <p class="text-sm text-orange-600 mb-1">Today you should eat...</p>
+        <p class="text-sm text-orange-600 mb-1" data-i18n="todayEat">Today you should eat...</p>
         <p id="resultFood" class="text-4xl font-bold text-orange-700 mb-2"></p>
         <p id="resultTagline" class="text-lg text-gray-600 italic"></p>
       </div>
     </div>
-
     <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 text-left mb-6">
-      <p class="text-sm font-semibold text-gray-700 mb-3">Customize Options (one per line)</p>
+      <p class="text-sm font-semibold text-gray-700 mb-3" data-i18n="customize">Customize Options (one per line)</p>
       <textarea id="optionsInput" rows="6" class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none">Hamburger
 Pizza
 Sushi
@@ -34,83 +30,80 @@ Tacos
 Curry
 Stir Fry
 BBQ</textarea>
-      <button id="updateBtn" class="mt-3 bg-gray-600 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-lg">Update Wheel</button>
+      <button id="updateBtn" class="mt-3 bg-gray-600 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-lg" data-i18n="updateBtn">Update Wheel</button>
     </div>
   </section>
-
   <section class="mt-10 mb-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">Why Use a Random Food Picker?</h2>
-    <p class="text-gray-600 text-sm leading-relaxed mb-4">Decision fatigue is real. A <strong>random food wheel</strong> removes the burden of choice and adds fun to meal planning.</p>
+    <h2 class="text-2xl font-bold text-gray-800 mb-4" data-i18n="whyTitle">Why Use a Random Food Picker?</h2>
+    <p class="text-gray-600 text-sm leading-relaxed mb-4" data-i18n="whyDesc">Decision fatigue is real. A <strong>random food wheel</strong> removes the burden of choice and adds fun to meal planning.</p>
   </section>
-
   <section id="faq" class="mb-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">FAQ</h2>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6" data-i18n="faq">FAQ</h2>
     <div class="space-y-4">
-      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">How does the food wheel work?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>Click spin and the wheel rotates randomly to land on a food item.</p></div></details>
-      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">Can I add my own foods?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>Yes! Edit the text area with one food per line and click Update.</p></div></details>
-      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">Is the spin random?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>Yes. Uses Math.random() for rotation angle.</p></div></details>
-      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">How many options?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>As many as you want. 6-12 works best for readability.</p></div></details>
-      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm">Mobile friendly?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p>Yes! Fully responsive on all devices.</p></div></details>
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm" data-i18n="fq1">How does the food wheel work?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p data-i18n="fa1">Click spin and the wheel rotates randomly to land on a food item.</p></div></details>
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm" data-i18n="fq2">Can I add my own foods?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p data-i18n="fa2">Yes! Edit the text area with one food per line and click Update.</p></div></details>
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm" data-i18n="fq3">Is the spin random?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p data-i18n="fa3">Yes. Uses Math.random() for rotation angle.</p></div></details>
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm" data-i18n="fq4">How many options?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p data-i18n="fa4">As many as you want. 6-12 works best for readability.</p></div></details>
+      <details class="group bg-gray-50 rounded-lg border border-gray-200 open:bg-white open:shadow-sm"><summary class="cursor-pointer px-4 py-3 font-semibold text-sm" data-i18n="fq5">Mobile friendly?</summary><div class="px-4 pb-4 text-sm text-gray-600"><p data-i18n="fa5">Yes! Fully responsive on all devices.</p></div></details>
     </div>
   </section>
-
   <script type="application/ld+json" is:inline>{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the food wheel work?","acceptedAnswer":{"@type":"Answer","text":"Click spin and the wheel rotates randomly."}},{"@type":"Question","name":"Can I add my own foods?","acceptedAnswer":{"@type":"Answer","text":"Yes! One food per line."}},{"@type":"Question","name":"Is the spin random?","acceptedAnswer":{"@type":"Answer","text":"Yes. Uses Math.random()."}},{"@type":"Question","name":"How many options?","acceptedAnswer":{"@type":"Answer","text":"6-12 works best."}},{"@type":"Question","name":"Mobile friendly?","acceptedAnswer":{"@type":"Answer","text":"Yes! Fully responsive."}}]}</script>
-
   <script is:inline define:vars={{}}>
-    (function () {
-      var canvas = document.getElementById("wheelCanvas");
-      var ctx = canvas.getContext("2d");
-      var spinBtn = document.getElementById("spinBtn");
-      var resultArea = document.getElementById("resultArea");
-      var updateBtn = document.getElementById("updateBtn");
-      var optionsInput = document.getElementById("optionsInput");
-      var currentAngle = 0;
-      var isSpinning = false;
-      var TAGLINES = ["A great choice!","You will love it!","Perfect meal!","Delicious!","Enjoy!","Yummy!","Tasty pick!","Bon appetit!"];
-      var COLORS = ["#f97316","#eab308","#22c55e","#3b82f6","#8b5cf6","#ec4899","#ef4444","#14b8a6","#f59e0b","#6366f1","#84cc16","#06b6d4"];
-
-      function getOptions() { return optionsInput.value.split("\n").map(function(s){return s.trim();}).filter(function(s){return s.length>0;}); }
-
-      function drawWheel(opts) {
-        var cx=canvas.width/2, cy=canvas.height/2, r=canvas.width/2-10;
-        var slice=(2*Math.PI)/opts.length;
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        for (var i=0;i<opts.length;i++) {
-          var sa=currentAngle+i*slice, ea=sa+slice;
-          ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,sa,ea); ctx.closePath();
-          ctx.fillStyle=COLORS[i%COLORS.length]; ctx.fill();
-          ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.stroke();
-          ctx.save(); ctx.translate(cx,cy); ctx.rotate(sa+slice/2);
-          ctx.textAlign="right"; ctx.fillStyle="#fff"; ctx.font="bold 14px sans-serif";
-          ctx.fillText(opts[i], r-15, 5); ctx.restore();
-        }
-      }
-
-      function spin() {
-        if (isSpinning) return;
-        var opts=getOptions(); if (opts.length<2) return;
-        isSpinning=true; spinBtn.disabled=true; spinBtn.textContent="Spinning...";
-        resultArea.classList.add("hidden");
-        var totalRot=(Math.random()*5+8)*2*Math.PI, dur=4000, start=Date.now(), sa=currentAngle;
-        function anim() {
-          var t=Math.min((Date.now()-start)/dur,1), ease=1-Math.pow(1-t,3);
-          currentAngle=sa+totalRot*ease; drawWheel(opts);
-          if (t<1) { requestAnimationFrame(anim); }
-          else {
-            isSpinning=false; spinBtn.disabled=false; spinBtn.textContent="Spin Again!";
-            var sl=(2*Math.PI)/opts.length, na=(2*Math.PI-(currentAngle%(2*Math.PI)))%(2*Math.PI);
-            var idx=Math.floor(na/sl)%opts.length;
-            document.getElementById("resultFood").textContent=opts[idx];
-            document.getElementById("resultTagline").textContent=TAGLINES[Math.floor(Math.random()*TAGLINES.length)];
-            resultArea.classList.remove("hidden");
-          }
-        }
-        anim();
-      }
-
-      spinBtn.addEventListener("click", spin);
-      updateBtn.addEventListener("click", function(){ currentAngle=0; drawWheel(getOptions()); });
-      drawWheel(getOptions());
-    })();
+    (function(){var canvas=document.getElementById("wheelCanvas"),ctx=canvas.getContext("2d"),spinBtn=document.getElementById("spinBtn"),resultArea=document.getElementById("resultArea"),updateBtn=document.getElementById("updateBtn"),optionsInput=document.getElementById("optionsInput"),currentAngle=0,isSpinning=false;var TAGLINES_EN=["A great choice!","You will love it!","Perfect meal!","Delicious!","Enjoy!","Yummy!","Tasty pick!","Bon appetit!"];var COLORS=["#f97316","#eab308","#22c55e","#3b82f6","#8b5cf6","#ec4899","#ef4444","#14b8a6","#f59e0b","#6366f1","#84cc16","#06b6d4"];function getTaglines(){var t=window._t;if(!t)return TAGLINES_EN;var v=t("taglines");if(v==="taglines")return TAGLINES_EN;return v.split("|");}function getOptions(){return optionsInput.value.split("\n").map(function(s){return s.trim();}).filter(function(s){return s.length>0;});}function drawWheel(opts){var cx=canvas.width/2,cy=canvas.height/2,r=canvas.width/2-10,slice=(2*Math.PI)/opts.length;ctx.clearRect(0,0,canvas.width,canvas.height);for(var i=0;i<opts.length;i++){var sa=currentAngle+i*slice,ea=sa+slice;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,sa,ea);ctx.closePath();ctx.fillStyle=COLORS[i%COLORS.length];ctx.fill();ctx.strokeStyle="#fff";ctx.lineWidth=2;ctx.stroke();ctx.save();ctx.translate(cx,cy);ctx.rotate(sa+slice/2);ctx.textAlign="right";ctx.fillStyle="#fff";ctx.font="bold 14px sans-serif";ctx.fillText(opts[i],r-15,5);ctx.restore();}}function spin(){if(isSpinning)return;var opts=getOptions();if(opts.length<2)return;isSpinning=true;spinBtn.disabled=true;spinBtn.textContent=window._t?window._t("spinning"):"Spinning...";resultArea.classList.add("hidden");var totalRot=(Math.random()*5+8)*2*Math.PI,dur=4000,start=Date.now(),sa=currentAngle;function anim(){var t=Math.min((Date.now()-start)/dur,1),ease=1-Math.pow(1-t,3);currentAngle=sa+totalRot*ease;drawWheel(opts);if(t<1){requestAnimationFrame(anim);}else{isSpinning=false;spinBtn.disabled=false;spinBtn.textContent=window._t?window._t("spinAgain"):"Spin Again!";var sl=(2*Math.PI)/opts.length,na=(2*Math.PI-(currentAngle%(2*Math.PI)))%(2*Math.PI);var idx=Math.floor(na/sl)%opts.length;document.getElementById("resultFood").textContent=opts[idx];var tl=getTaglines();document.getElementById("resultTagline").textContent=tl[Math.floor(Math.random()*tl.length)];resultArea.classList.remove("hidden");}}anim();}spinBtn.addEventListener("click",spin);updateBtn.addEventListener("click",function(){currentAngle=0;drawWheel(getOptions());});window.calculate=function(){};drawWheel(getOptions());})();
+  </script>
+  <script is:inline>
+  (function(){
+  var LANGS={en:'English',es:'Español',de:'Deutsch',fr:'Français',ja:'日本語',zh:'简体中文',pt:'Português',it:'Italiano',ru:'Русский',ko:'한국어',ar:'العربية',hi:'हिन्दी',th:'ไทย',tr:'Türkçe'};
+  var translations={
+en:{pageDesc:'Can not decide <strong>what to eat today</strong>? Spin the <strong>food picker wheel</strong> and let fate choose!',spinBtn:'Spin the Wheel!',todayEat:'Today you should eat...',customize:'Customize Options (one per line)',updateBtn:'Update Wheel',whyTitle:'Why Use a Random Food Picker?',whyDesc:'Decision fatigue is real. A <strong>random food wheel</strong> removes the burden of choice.',faq:'FAQ',fq1:'How does the food wheel work?',fa1:'Click spin and the wheel rotates randomly to land on a food item.',fq2:'Can I add my own foods?',fa2:'Yes! Edit the text area with one food per line and click Update.',fq3:'Is the spin random?',fa3:'Yes. Uses Math.random() for rotation angle.',fq4:'How many options?',fa4:'As many as you want. 6-12 works best.',fq5:'Mobile friendly?',fa5:'Yes! Fully responsive on all devices.',spinning:'Spinning...',spinAgain:'Spin Again!',taglines:'A great choice!|You will love it!|Perfect meal!|Delicious!|Enjoy!|Yummy!|Tasty pick!|Bon appetit!'},
+es:{pageDesc:'¿No sabes <strong>qué comer hoy</strong>? ¡Gira la <strong>ruleta de comida</strong> y deja que el destino elija!',spinBtn:'¡Gira la Ruleta!',todayEat:'Hoy deberías comer...',customize:'Personalizar (una por línea)',updateBtn:'Actualizar',whyTitle:'¿Por Qué una Ruleta de Comida?',whyDesc:'La fatiga de decisión es real. Una <strong>ruleta aleatoria</strong> elimina la carga de elegir.',faq:'Preguntas',fq1:'¿Cómo funciona?',fa1:'Haz clic en girar y la ruleta se detiene en una comida.',fq2:'¿Puedo añadir mis comidas?',fa2:'¡Sí! Edita con una comida por línea y Actualizar.',fq3:'¿Es aleatorio?',fa3:'Sí. Usa Math.random().',fq4:'¿Cuántas opciones?',fa4:'Las que quieras. 6-12 es ideal.',fq5:'¿Funciona en móvil?',fa5:'¡Sí! Totalmente responsivo.',spinning:'Girando...',spinAgain:'¡Girar de Nuevo!',taglines:'¡Gran elección!|¡Te encantará!|¡Perfecto!|¡Delicioso!|¡Disfruta!|¡Riquísimo!|¡Buena elección!|¡Buen provecho!'},
+de:{pageDesc:'Weißt du nicht <strong>was du essen sollst</strong>? Dreh das <strong>Essensrad</strong>!',spinBtn:'Rad Drehen!',todayEat:'Heute solltest du essen...',customize:'Optionen (eine pro Zeile)',updateBtn:'Rad Aktualisieren',whyTitle:'Warum ein Essensrad?',whyDesc:'Entscheidungsmüdigkeit ist real. Ein <strong>Zufallsrad</strong> nimmt die Qual der Wahl.',faq:'FAQ',fq1:'Wie funktioniert es?',fa1:'Klicke Drehen und das Rad landet auf einem Gericht.',fq2:'Eigene Speisen?',fa2:'Ja! Eine Speise pro Zeile und Aktualisieren.',fq3:'Zufällig?',fa3:'Ja. Verwendet Math.random().',fq4:'Wie viele?',fa4:'So viele du willst. 6-12 ideal.',fq5:'Mobilfreundlich?',fa5:'Ja! Voll responsiv.',spinning:'Dreht sich...',spinAgain:'Nochmal!',taglines:'Große Wahl!|Du wirst es lieben!|Perfekt!|Köstlich!|Genieße!|Lecker!|Gute Wahl!|Guten Appetit!'},
+fr:{pageDesc:'Vous ne savez pas <strong>quoi manger</strong> ? Tournez la <strong>roue</strong> !',spinBtn:'Tourner !',todayEat:'Aujourd\'hui mangez...',customize:'Options (une par ligne)',updateBtn:'Mettre à Jour',whyTitle:'Pourquoi une Roue ?',whyDesc:'La fatigue décisionnelle est réelle. Une <strong>roue aléatoire</strong> élimine le choix.',faq:'FAQ',fq1:'Comment ça marche ?',fa1:'Cliquez tourner, la roue se pose sur un plat.',fq2:'Ajouter mes plats ?',fa2:'Oui ! Un plat par ligne et Mettre à Jour.',fq3:'Aléatoire ?',fa3:'Oui. Math.random().',fq4:'Combien d\'options ?',fa4:'Autant que voulu. 6-12 idéal.',fq5:'Mobile ?',fa5:'Oui ! Responsive.',spinning:'Tourne...',spinAgain:'Encore !',taglines:'Excellent !|Vous allez adorer !|Parfait !|Délicieux !|Bon appétit !|Miam !|Bon choix !|Régalez-vous !'},
+ja:{pageDesc:'<strong>今日何を食べるか</strong>決められない？<strong>フードホイール</strong>を回そう！',spinBtn:'ホイールを回す！',todayEat:'今日食べるべきは...',customize:'オプション（1行1つ）',updateBtn:'更新',whyTitle:'ランダムフードピッカー？',whyDesc:'決定疲労に。<strong>ランダムホイール</strong>が選択を楽に。',faq:'よくある質問',fq1:'仕組みは？',fa1:'スピンでホイールがランダムに回転し食べ着地。',fq2:'追加できる？',fa2:'はい！1行1つずつ編集して更新。',fq3:'ランダム？',fa3:'はい。Math.random()使用。',fq4:'いくつ？',fa4:'自由に。6-12が最適。',fq5:'モバイル対応？',fa5:'はい！完全レスポンシブ。',spinning:'回転中...',spinAgain:'もう一回！',taglines:'素晴らしい！|気に入るはず！|完璧！|美味しい！|楽しんで！|うまい！|いい選択！|召し上がれ！'},
+zh:{pageDesc:'不知道<strong>今天吃什么</strong>？转动<strong>美食转盘</strong>让命运来选！',spinBtn:'转动转盘！',todayEat:'今天你应该吃...',customize:'自定义选项（每行一个）',updateBtn:'更新转盘',whyTitle:'为什么用随机美食转盘？',whyDesc:'决策疲劳真实存在。<strong>随机转盘</strong>消除选择负担。',faq:'常见问题',fq1:'怎么用？',fa1:'点击旋转，转盘随机转到一种食物。',fq2:'能自定义吗？',fa2:'能！每行一个食物，点更新。',fq3:'随机的吗？',fa3:'是的。使用Math.random()。',fq4:'几个选项？',fa4:'随意。6-12个最佳。',fq5:'手机能用吗？',fa5:'能！完全响应式。',spinning:'旋转中...',spinAgain:'再转一次！',taglines:'好选择！|你会喜欢的！|完美！|好吃！|享受吧！|美味！|好品味！|用餐愉快！'},
+pt:{pageDesc:'Não sabe <strong>o que comer</strong>? Gire a <strong>roleta</strong>!',spinBtn:'Girar!',todayEat:'Hoje você deveria comer...',customize:'Opções (uma por linha)',updateBtn:'Atualizar',whyTitle:'Por Que uma Roleta?',whyDesc:'Fadiga de decisão é real. Uma <strong>roleta</strong> elimina a escolha.',faq:'Perguntas',fq1:'Como funciona?',fa1:'Clique girar e a roleta para em uma comida.',fq2:'Posso adicionar?',fa2:'Sim! Uma comida por linha e Atualizar.',fq3:'Aleatório?',fa3:'Sim. Math.random().',fq4:'Quantas opções?',fa4:'Quantas quiser. 6-12 ideal.',fq5:'Celular?',fa5:'Sim! Responsivo.',spinning:'Girando...',spinAgain:'Girar de Novo!',taglines:'Ótima escolha!|Vai adorar!|Perfeito!|Delicioso!|Aproveite!|Gostoso!|Boa!|Bom apetite!'},
+it:{pageDesc:'Non sai <strong>cosa mangiare</strong>? Gira la <strong>ruota</strong>!',spinBtn:'Gira!',todayEat:'Oggi dovresti mangiare...',customize:'Opzioni (una per riga)',updateBtn:'Aggiorna',whyTitle:'Perché una Ruota?',whyDesc:'La fatica decisionale è reale. Una <strong>ruota</strong> elimina la scelta.',faq:'FAQ',fq1:'Come funziona?',fa1:'Clicca gira e la ruota si ferma su un cibo.',fq2:'Posso aggiungere?',fa2:'Sì! Un cibo per riga e Aggiorna.',fq3:'Casuale?',fa3:'Sì. Math.random().',fq4:'Quante opzioni?',fa4:'Quante vuoi. 6-12 ideale.',fq5:'Mobile?',fa5:'Sì! Responsive.',spinning:'Girando...',spinAgain:'Ancora!',taglines:'Ottima scelta!|Ti piacerà!|Perfetto!|Delizioso!|Buon appetito!|Gustoso!|Bella!|Goditi!'},
+ru:{pageDesc:'Не знаете <strong>что съесть</strong>? Крутите <strong>колесо</strong>!',spinBtn:'Крутить!',todayEat:'Сегодня стоит съесть...',customize:'Настройки (по одной в строке)',updateBtn:'Обновить',whyTitle:'Зачем колесо еды?',whyDesc:'Усталость от решений. <strong>Случайное колесо</strong> снимает выбор.',faq:'ЧаВо',fq1:'Как работает?',fa1:'Нажмите крутить — колесо остановится на блюде.',fq2:'Свои блюда?',fa2:'Да! Одно блюдо в строке и Обновить.',fq3:'Случайно?',fa3:'Да. Math.random().',fq4:'Сколько?',fa4:'Сколько хотите. 6-12 оптимально.',fq5:'Мобильный?',fa5:'Да! Адаптивно.',spinning:'Крутится...',spinAgain:'Ещё!',taglines:'Отлично!|Вам понравится!|Идеально!|Вкусно!|Наслаждайтесь!|Объедение!|Хорошо!|Приятного аппетита!'},
+ko:{pageDesc:'<strong>오늘 뭐 먹을지</strong> 모르겠나요? <strong>휠</strong>을 돌리세요!',spinBtn:'휠 돌리기!',todayEat:'오늘 먹어야 할 것은...',customize:'옵션 (한 줄에 하나)',updateBtn:'업데이트',whyTitle:'왜 랜덤 음식 픽커?',whyDesc:'결정 피로에. <strong>랜덤 휠</strong>이 선택 부담 제거.',faq:'자주 묻는 질문',fq1:'어떻게 작동?',fa1:'스핀 클릭 → 휠이 무작위 음식에 착지.',fq2:'추가 가능?',fa2:'네! 한 줄에 하나씩 입력 후 업데이트.',fq3:'무작위?',fa3:'네. Math.random() 사용.',fq4:'몇 개?',fa4:'원하는 만큼. 6-12개 최적.',fq5:'모바일?',fa5:'네! 완전 반응형.',spinning:'회전 중...',spinAgain:'다시!',taglines:'좋은 선택!|맛있을 거예요!|완벽!|맛있어요!|즐기세요!|꿀맛!|좋은 골라!|맛있게!'},
+ar:{pageDesc:'لا تعرف <strong>ماذا تأكل</strong>؟ أدر <strong>العجلة</strong>!',spinBtn:'أدر العجلة!',todayEat:'اليوم يجب أن تأكل...',customize:'الخيارات (واحد في السطر)',updateBtn:'تحديث',whyTitle:'لماذا عجلة طعام؟',whyDesc:'إرهاق القرار. <strong>عجلة عشوائية</strong> تزيل عبء الاختيار.',faq:'أسئلة',fq1:'كيف تعمل؟',fa1:'انقر تدوير والعجلة تتوقف على طعام.',fq2:'إضافة أطعمتي؟',fa2:'نعم! طعام واحد في السطر وتحديث.',fq3:'عشوائي؟',fa3:'نعم. Math.random().',fq4:'كم خياراً؟',fa4:'بقدر ما تريد. 6-12 الأفضل.',fq5:'جوال؟',fa5:'نعم! متجاوب.',spinning:'يدور...',spinAgain:'مجدداً!',taglines:'اختيار رائع!|ستحبه!|مثالي!|لذيذ!|استمتع!|شهي!|جيد!|بالهنا!'},
+hi:{pageDesc:'<strong>आज क्या खाएं</strong> तय नहीं? <strong>व्हील</strong> घुमाएं!',spinBtn:'व्हील घुमाएं!',todayEat:'आज खाना चाहिए...',customize:'विकल्प (प्रति पंक्ति एक)',updateBtn:'अपडेट',whyTitle:'रैंडम फूड पिकर क्यों?',whyDesc:'निर्णय थकान। <strong>रैंडम व्हील</strong> चयन हटाता है।',faq:'सामान्य प्रश्न',fq1:'कैसे काम करता है?',fa1:'स्पिन क्लिक → व्हील भोजन पर रुकेगा।',fq2:'अपना जोड़ें?',fa2:'हाँ! प्रति पंक्ति एक और अपडेट।',fq3:'यादृच्छिक?',fa3:'हाँ। Math.random()।',fq4:'कितने?',fa4:'जितने चाहें। 6-12 अच्छा।',fq5:'मोबाइल?',fa5:'हाँ! रिस्पॉन्सिव।',spinning:'घूम रहा...',spinAgain:'फिर से!',taglines:'बढ़िया!|पसंद आएगा!|परिपूर्ण!|स्वादिष्ट!|आनंद!|स्वाद!|अच्छा!|बॉन एपेटीत!'},
+th:{pageDesc:'เลือกไม่ได้ว่า<strong>กินอะไรดี</strong>? หมุน<strong>วงล้อ</strong>!',spinBtn:'หมุนวงล้อ!',todayEat:'วันนี้ควรกิน...',customize:'ตัวเลือก (บรรทัดละหนึ่ง)',updateBtn:'อัพเดท',whyTitle:'ทำไมวงล้อสุ่ม?',whyDesc:'เหนื่อยกับการตัดสินใจ <strong>วงล้อสุ่ม</strong>ลดภาระการเลือก',faq:'คำถามที่พบบ่อย',fq1:'ทำงานอย่างไร?',fa1:'คลิกหมุน วงล้อหยุดที่อาหารแบบสุ่ม',fq2:'เพิ่มเองได้?',fa2:'ได้! อาหารหนึ่งอย่างต่อบรรทัด แล้วอัพเดท',fq3:'สุ่มไหม?',fa3:'ใช่ ใช้ Math.random()',fq4:'กี่ตัวเลือก?',fa4:'เท่าไรก็ได้ 6-12 ดีสุด',fq5:'มือถือ?',fa5:'ได้! รองรับทุกอุปกรณ์',spinning:'กำลังหมุน...',spinAgain:'หมุนอีก!',taglines:'เลือกได้ดี!|จะชอบ!|สมบูรณ์แบบ!|อร่อย!| Enjoy!|อร่อยมาก!|ดี!|ขอให้เอร็ดอร่อย!'},
+tr:{pageDesc:'<strong>Ne yiyeceğinize</strong> karar veremiyor musunuz? <strong>Çarkı</strong> çevirin!',spinBtn:'Çarkı Çevir!',todayEat:'Bugün yemelisiniz...',customize:'Seçenekler (satır başına bir)',updateBtn:'Güncelle',whyTitle:'Neden Yemek Çarkı?',whyDesc:'Karar yorgunluğu. <strong>Rastgele çark</strong> seçimi kaldırır.',faq:'SSS',fq1:'Nasıl çalışır?',fa1:'Çevir\'e tıklayın, çark bir yiyecekte dursun.',fq2:'Kendi yemeklerim?',fa2:'Evet! Satır başına bir ve Güncelle.',fq3:'Rastgele?',fa3:'Evet. Math.random().',fq4:'Kaç seçenek?',fa4:'İstediğiniz kadar. 6-12 en iyi.',fq5:'Mobil?',fa5:'Evet! Tam uyumlu.',spinning:'Çevriliyor...',spinAgain:'Tekrar!',taglines:'Harika!|Beğeneceksiniz!|Mükemmel!|Lezzetli!|Afiyet!|Nefis!|İyi!|Şifa olsun!'}
+  };
+  var meta={
+en:{title:'What Should I Eat Today? - Random Food Picker Wheel',desc:'Spin the food wheel and let fate choose your meal!'},
+es:{title:'¿Qué Debería Comer Hoy? - Ruleta de Comida',desc:'¡Gira la ruleta y deja que el destino elija!'},
+de:{title:'Was Soll Ich Heute Essen? - Essensrad',desc:'Dreh das Essensrad und lass das Schicksal wählen!'},
+fr:{title:'Que Manger Aujourd\'hui ? - Roue Alimentaire',desc:'Tournez la roue et laissez le destin choisir !'},
+ja:{title:'今日何食べる？- ランダムフードホイール',desc:'フードホイールを回して運命に決めさせよう！'},
+zh:{title:'今天吃什么？- 随机美食转盘',desc:'转动美食转盘，让命运为你选择一餐！'},
+pt:{title:'O Que Devo Comer Hoje? - Roleta',desc:'Gire a roleta e deixe o destino escolher!'},
+it:{title:'Cosa Mangiare Oggi? - Ruota del Cibo',desc:'Gira la ruota e lascia scegliere al destino!'},
+ru:{title:'Что Съесть Сегодня? - Колесо Еды',desc:'Крутите колесо и доверьтесь судьбе!'},
+ko:{title:'오늘 뭐 먹지? - 랜덤 음식 휠',desc:'음식 휠을 돌려 운명에 맡기세요!'},
+ar:{title:'ماذا آكل اليوم؟ - عجلة الطعام',desc:'أدر العجلة ودع القدر يختار!'},
+hi:{title:'आज क्या खाएं? - रैंडम फूड व्हील',desc:'फूड व्हील घुमाएं और किस्मत पर छोड़ दें!'},
+th:{title:'วันนี้กินอะไรดี? - วงล้อสุ่มอาหาร',desc:'หมุนวงล้อแล้วปล่อยให้โชคเลือก!'},
+tr:{title:'Bugün Ne Yemeli? - Yemek Çarkı',desc:'Çarkı çevirin ve kadere bırakın!'}
+  };
+  var sel=document.createElement('select');
+  sel.id='langSwitcher';
+  Object.keys(LANGS).forEach(function(code){var opt=document.createElement('option');opt.value=code;opt.textContent=LANGS[code];sel.appendChild(opt);});
+  sel.style.cssText='position:fixed;top:12px;right:12px;z-index:9999;padding:6px 28px 6px 10px;border:1px solid #d1d5db;border-radius:8px;background:white url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 12 12\'%3E%3Cpath d=\'M3 5l3 3 3-3\' fill=\'none\' stroke=\'%23666\' stroke-width=\'1.5\'/%3E%3C/svg%3E") no-repeat right 8px center;background-size:12px;font-size:13px;color:#374151;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;box-shadow:0 1px 3px rgba(0,0,0,0.08);transition:border-color 0.2s,box-shadow 0.2s';
+  document.body.prepend(sel);
+  window._t=function(key){var lang=localStorage.getItem('siteLang')||detectLang();return(translations[lang]&&translations[lang][key])||translations.en[key]||key;};
+  function detectLang(){var saved=localStorage.getItem('siteLang');if(saved&&translations[saved])return saved;var nav=(navigator.language||navigator.userLanguage||'en').toLowerCase();var base=nav.split('-')[0];if(translations[base])return base;return'en';}
+  function applyI18n(lang){
+    if(!translations[lang])lang='en';
+    localStorage.setItem('siteLang',lang);
+    sel.value=lang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){var key=el.getAttribute('data-i18n');if(translations[lang][key]!==undefined)el.innerHTML=translations[lang][key];});
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){var key=el.getAttribute('data-i18n-placeholder');if(translations[lang][key]!==undefined)el.placeholder=translations[lang][key];});
+    if(meta[lang]){document.title=meta[lang].title;var dm=document.querySelector('meta[name="description"]');if(dm)dm.content=meta[lang].desc;}
+    document.documentElement.lang=lang;
+  }
+  sel.addEventListener('change',function(){applyI18n(this.value);if(typeof calculate==='function')calculate();});
+  applyI18n(detectLang());
+  })();
   </script>
 </Layout>

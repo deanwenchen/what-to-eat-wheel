@@ -10,9 +10,26 @@ const { title, description = 'What Should I Eat Today?' } = Astro.props;
   </head>
   <body class="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
     <div class="container mx-auto px-4 py-8 max-w-4xl">
-      <header class="text-center mb-8"><h1 class="text-4xl font-bold text-orange-600 mb-2">What Should I Eat Today?</h1><p class="text-gray-600">Spin the wheel and let fate decide!</p></header>
+      <header class="text-center mb-8"><h1 data-i18n="headerTitle" class="text-4xl font-bold text-orange-600 mb-2">What Should I Eat Today?</h1><p data-i18n="headerDesc" class="text-gray-600">Spin the wheel and let fate decide!</p></header>
       <main><div class="bg-white rounded-xl shadow-lg p-6 mb-6"><slot /></div></main>
-      <footer class="text-center mt-8 text-gray-500 text-sm"><p>&copy; 2025 What Should I Eat Today? Random food picker.</p></footer>
+      <footer class="text-center mt-8 text-gray-500 text-sm"><p data-i18n="footerCopy">&copy; 2025 What Should I Eat Today? Random food picker.</p>    <div class="mt-8 pt-8 border-t border-gray-200">
+      <h2 class="text-gray-400 text-xs font-semibold uppercase tracking-widest mb-4 text-center">More Free Online Tools</h2>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs">
+              <a href="https://2048.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">2048 Game</a>
+              <a href="https://cat-age-calc.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">Cat Age Calculator</a>
+              <a href="https://freelance-rate-calc.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">Freelance Rate Calculator</a>
+              <a href="https://jargon.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">Jargon Translator</a>
+              <a href="https://keto-carb.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">Keto Carb Calculator</a>
+              <a href="https://pass-gen.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">Password Generator</a>
+              <a href="https://pet-toxicity.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">Pet Toxicity Calculator</a>
+              <a href="https://pet-water.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">Pet Water Intake Calculator</a>
+              <a href="https://running-pace.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">Running Pace Calculator</a>
+              <a href="https://saas-pricing.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">SaaS Pricing Calculator</a>
+              <a href="https://timezone.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">Timezone Meeting Finder</a>
+              <a href="https://yt-money.lazytoolshub.top" class="text-gray-400 hover:text-gray-600 transition-colors" target="_blank" rel="noopener">YouTube Money Calculator</a>
+      </div>
+    </div>
+  </footer>
     </div>
   </body>
 </html>
