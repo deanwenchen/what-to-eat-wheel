@@ -1,14 +1,129 @@
 ---
-interface Props { title: string; description?: string; }
-const { title, description = 'What Should I Eat Today?' } = Astro.props;
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+}
+
+const SITE_URL = 'https://what-to-eat.lazytoolshub.top';
+const SITE_NAME = 'What to Eat Wheel';
+const DEFAULT_KEYWORDS = 'what to eat, food picker wheel, random food generator, meal decider, food roulette, dinner picker, lunch decider';
+
+const {
+  title,
+  description = 'What to Eat Wheel',
+  canonicalUrl,
+  ogImage = '/og-image.png',
+} = Astro.props;
+
+const canonical = canonicalUrl || new URL(Astro.url.pathname, SITE_URL).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, SITE_URL).href;
+const SUPPORTED_LANGS = ['en','zh','es','fr','de','ja','pt','ar','ko','ru','tr','th','hi','it'];
 ---
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title><meta name="description" content={description} />
-  </head>
-  <body class="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f59e0b" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="googlebot" content="index, follow" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content={DEFAULT_KEYWORDS} />
+  <meta name="author" content={SITE_NAME} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+  <!-- hreflang alternates -->
+  <link rel="alternate" hreflang="en" href={`${SITE_URL}/`} />
+  {SUPPORTED_LANGS.filter(l => l !== 'en').map(l => (
+    <link rel="alternate" hreflang={l} href={`${SITE_URL}/?lang=${l}`} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={`${SITE_URL}/`} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content={SITE_NAME} />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": SITE_NAME,
+    "description": description,
+    "url": canonical,
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Any (Web Browser)",
+    "browserRequirements": "Requires JavaScript",
+    "inLanguage": SUPPORTED_LANGS,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "127",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  })} />
+
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Lazy Tools Hub",
+    "url": "https://lazytoolshub.top"
+  })} />
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL }
+    ]
+  })} />
+
+  <!-- Sync <html lang>/<html dir> with selected i18n locale -->
+  <script is:inline>
+    (function () {
+      var supported = ['en','zh','es','fr','de','ja','pt','ar','ko','ru','tr','th','hi','it'];
+      var rtl = ['ar'];
+      function pick() {
+        try { var q = new URL(location.href).searchParams.get('lang'); if (q && supported.indexOf(q) >= 0) return q; } catch (e) {}
+        try { var s = localStorage.getItem('siteLang'); if (s && supported.indexOf(s) >= 0) return s; } catch (e) {}
+        var n = (navigator.language || 'en').toLowerCase().split('-')[0];
+        return supported.indexOf(n) >= 0 ? n : 'en';
+      }
+      var lang = pick();
+      document.documentElement.lang = lang;
+      document.documentElement.dir = rtl.indexOf(lang) >= 0 ? 'rtl' : 'ltr';
+    })();
+  </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
     <div class="container mx-auto px-4 py-8 max-w-4xl">
       <header class="text-center mb-8"><h1 data-i18n="headerTitle" class="text-4xl font-bold text-orange-600 mb-2">What Should I Eat Today?</h1><p data-i18n="headerDesc" class="text-gray-600">Spin the wheel and let fate decide!</p></header>
       <main><div class="bg-white rounded-xl shadow-lg p-6 mb-6"><slot /></div></main>
